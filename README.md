@@ -1,27 +1,28 @@
-# CalculadoraAngular
+# Calculadora Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+Este é um projeto de uma calculadora em Angular que foi desenvolvido com o objetivo de aprimorar meus conhecimentos em Angular. A calculadora tem um formato parecido com a calculadora padrão do Windows e realiza as operações básicas de soma, subtração, multiplicação, divisão e potenciação, além de contar com números com vírgula e botões de apagar o último dígito ou todos os dígitos de uma vez. Há também um botão para alternar entre o light mode e o dark mode.
 
-## Development server
+O projeto está hospedado no endereço https://calculadora-angular-26fe7.web.app/.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Bugs conhecidos
 
-## Code scaffolding
+Atualmente, O botão de porcentagem e a raiz quadrada não estão calculando corretamente. acredito que aconteçam erros em operações com números que não são inteiros, mas isso já foi otimizado e melhorado bastante.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Melhorias futuras
 
-## Build
+Planejo melhorar o botão de troca de sinal e melhorar o design tanto do botão de light e dark mode.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologias usadas
 
-## Running unit tests
+O projeto foi desenvolvido com as seguintes tecnologias:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular
+- TypeScript
+- HTML
+- SCSS
 
-## Running end-to-end tests
+## Autor
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+* Thiago da Silveira Gentil. 
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Aproveite a calculadora!
