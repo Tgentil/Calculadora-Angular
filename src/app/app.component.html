@@ -1,0 +1,31 @@
+<div [class]="calculatorClass">
+  <input type="text" class="calculator-screen" [value]="calculatorScreenValue" disabled />
+  <div class="calculator-keys">
+    <button type="button" class="toggle-mode" (click)="toggleMode(); ; changeButtonName()">{{ toggleButtonName }}</button>
+    <button type="button" class="clear-entry" (click)="handleButtonClick('ce')">ce</button>
+    <button type="button" class="clear" (click)="handleButtonClick('c')">c</button>
+    <button type="button" class="backspace" (click)="handleButtonClick('backspace')" >&larr;</button>
+    <button type="button" class="percent" (click)="handleButtonClick('%')" >%</button>
+    <button type="button" class="power" (click)="handleButtonClick('x²')" >x²</button>
+    <button type="button" class="square-root" (click)="handleButtonClick('&radic;')" >&radic;</button>
+    <button type="button" class="operator" (click)="handleButtonClick('/')">&divide;</button>
+    <button type="button" class="number" (click)="handleButtonClick('7')" value="7">7</button>
+    <button type="button" class="number" (click)="handleButtonClick('8')" value="8">8</button>
+    <button type="button" class="number" (click)="handleButtonClick('9')" value="9">9</button>
+    <button type="button" class="operator" (click)="handleButtonClick('*')">&times;</button>
+    <button type="button" class="number" (click)="handleButtonClick('4')" value="4">4</button>
+    <button type="button" class="number" (click)="handleButtonClick('5')" value="5">5</button>
+    <button type="button" class="number" (click)="handleButtonClick('6')" value="6">6</button>
+    <button type="button" class="operator" (click)="handleButtonClick('-')">-</button>
+    <button type="button" class="number" (click)="handleButtonClick('1')" value="1">1</button>
+    <button type="button" class="number" (click)="handleButtonClick('2')" value="2">2</button>
+    <button type="button" class="number" (click)="handleButtonClick('3')" value="3">3</button>
+    <button type="button" class="operator" value="+" (click)="handleButtonClick('+')" >+</button>
+    <button type="button" class="plus-minus">&#177;</button>
+    <button type="button" class="number" (click)="handleButtonClick('0')" value="0">0</button>
+    <button type="button" class="decimal" value="," (click)="handleButtonClick(',')" >,</button>
+    <button type="button" class="equal-sign operator" (click)="handleButtonClick('=')" value="=">=</button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
