@@ -12,7 +12,6 @@ export class AppComponent {
   calculatorScreenValue = '0';
   calculatorClass = 'calculator'; // Classe padrão
   calculatorMode = 'light';
-  toggleButtonName = 'Dark mode'; // Nome do botão para alternar o modo
 
   // Array para armazenar os valores e operadores digitados
   calculatorInput: any[] = [];
@@ -136,15 +135,6 @@ export class AppComponent {
     } else {
       this.calculatorMode = 'light';
       this.calculatorClass = 'calculator';
-    }
-  }
-
-  //função para mudar o nome do botão para dark e light
-  changeButtonName() {
-    if (this.toggleButtonName === 'Dark mode') {
-      this.toggleButtonName = 'Light mode';
-    } else {
-      this.toggleButtonName = 'Dark mode';
     }
   }
 }

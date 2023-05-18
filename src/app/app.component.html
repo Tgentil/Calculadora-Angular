@@ -1,7 +1,10 @@
 <div [class]="calculatorClass">
   <input type="text" class="calculator-screen" [value]="calculatorScreenValue" disabled />
   <div class="calculator-keys">
-    <button type="button" class="toggle-mode" (click)="toggleMode(); ; changeButtonName()">{{ toggleButtonName }}</button>
+    <label class="switch-container">
+      <input type="checkbox" (change)="toggleMode()">
+      <span class="slider"></span>
+    </label>
     <button type="button" class="clear-entry" (click)="handleButtonClick('ce')">ce</button>
     <button type="button" class="clear" (click)="handleButtonClick('c')">c</button>
     <button type="button" class="backspace" (click)="handleButtonClick('backspace')" >&larr;</button>
