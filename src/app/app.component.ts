@@ -74,7 +74,7 @@ export class AppComponent {
       case 'c': // limpa completamente o array de entrada
         this.clearInput();
         break;
-      case 'backspace':  // remove o último elemento do array de entrada da calculadora
+      case 'backspace': // remove o último elemento do array de entrada da calculadora
         this.calculatorInput.pop();
         this.updateCalculatorScreenValue();
         break;
@@ -85,16 +85,14 @@ export class AppComponent {
         this.updateCalculatorScreenValue();
         break;
       case '&radic;': //pega o valor atual do array de entrada, calcula a raiz quadrada e atualiza o array de entrada e a tela
-        const squareRootValue = Math.sqrt(parseFloat(this.calculatorInput.join('')));
+        const squareRootValue = Math.sqrt(
+          parseFloat(this.calculatorInput.join(''))
+        );
         this.calculatorInput = [squareRootValue.toString()];
         this.updateCalculatorScreenValue();
         break;
-      case '%': //pega o penúltimo valor do array de entrada (o valor anterior ao operador), calcula a porcentagem do valor atual e atualiza o array de entrada e a tela
-        const previousValue = parseFloat(this.calculatorInput[this.calculatorInput.length - 2]);
-        const currentValuePercent = parseFloat(this.calculatorInput.join('')) / 100;
-        const percentValue = previousValue * currentValuePercent;
-        this.calculatorInput = [percentValue.toString()];
-        this.updateCalculatorScreenValue();
+      case '%': // Redireciona o User para uma nova calculadora
+        window.location.href = 'https://tgentil.github.io/porcentagens/';
         break;
       case '/': //adiciona o operador / ao array de entrada
       case '*': //adiciona o operador / ao array de entrada
@@ -102,9 +100,13 @@ export class AppComponent {
       case '+': //adiciona o operador / ao array de entrada
         this.addInput(value);
         break;
-        case ',': // adiciona a vírgula ao array de entrada
+      case ',': // adiciona a vírgula ao array de entrada
         // verificação para adicionar 0 antes da vírgula se o valor atual for vazio ou não tiver valor após a vírgula
-        if (this.calculatorScreenValue === '0' || this.calculatorScreenValue.slice(-1) === ',' || this.calculatorScreenValue.slice(-1) === '') {
+        if (
+          this.calculatorScreenValue === '0' ||
+          this.calculatorScreenValue.slice(-1) === ',' ||
+          this.calculatorScreenValue.slice(-1) === ''
+        ) {
           this.addInput('0,');
         } else {
           this.addInput(',');
