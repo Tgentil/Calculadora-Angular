@@ -8,36 +8,22 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'calculadora';
 
-  // Variável para armazenar o valor atual da tela
   calculatorScreenValue = '0';
-  calculatorClass = 'calculator'; // Classe padrão
+  calculatorClass = 'calculator';
   calculatorMode = 'light';
-
-  // Array para armazenar os valores e operadores digitados
   calculatorInput: any[] = [];
 
   // Função para adicionar um valor ou operador ao array de entrada
   addInput(input: string) {
-    // Adiciona o valor ou operador ao array de entrada
     this.calculatorInput.push(input);
 
-    // Atualiza o valor da tela da calculadora
     this.updateCalculatorScreenValue();
   }
 
   // Função para atualizar o valor da tela da calculadora
   updateCalculatorScreenValue() {
-    // Cria uma cópia do array de entrada para manipulação
     const input = [...this.calculatorInput];
 
-    /*
-    // Se o último item do array for um operador, remove-o
-    if (['+', '-', '*', '/'].includes(input[input.length - 1])) {
-      input.pop();
-    }
-    */
-
-    // Atualiza o valor da tela da calculadora
     this.calculatorScreenValue = input.join('');
   }
 
@@ -50,16 +36,12 @@ export class AppComponent {
   // Função para calcular o resultado da expressão no array de entrada
   calculateResult() {
     try {
-      // Usa a função eval() para calcular o resultado da expressão
       const result = eval(this.calculatorInput.join(''));
 
-      // Limpa o array de entrada e adiciona o resultado
       this.calculatorInput = [result.toString()];
 
-      // Atualiza o valor da tela da calculadora
       this.updateCalculatorScreenValue();
     } catch {
-      // Se houver um erro ao calcular o resultado, limpa o array de entrada e a tela da calculadora
       this.clearInput();
     }
   }
@@ -67,41 +49,57 @@ export class AppComponent {
   // Função para manipular os cliques nos botões da calculadora
   handleButtonClick(value: string) {
     switch (value) {
-      case 'ce': // remove o último elemento do array de entrada da calculadora
+      case 'ce':
         this.calculatorInput.pop();
         this.updateCalculatorScreenValue();
         break;
-      case 'c': // limpa completamente o array de entrada
+      case 'c':
         this.clearInput();
         break;
-      case 'backspace': // remove o último elemento do array de entrada da calculadora
+      case 'backspace':
         this.calculatorInput.pop();
         this.updateCalculatorScreenValue();
         break;
-      case 'x²': // pega o valor atual do array de entrada, calcula o seu quadrado e atualiza o array de entrada e a tela
-        const currentValue = parseFloat(this.calculatorInput.join(''));
+      case 'x²':
+        const currentValue = parseFloat(this.calculatorInput.join('').replace(',', '.'));
         const squaredValue = Math.pow(currentValue, 2);
-        this.calculatorInput = [squaredValue.toString()];
+        this.calculatorInput = [squaredValue.toString().replace('.', ',')];
         this.updateCalculatorScreenValue();
         break;
-      case '&radic;': //pega o valor atual do array de entrada, calcula a raiz quadrada e atualiza o array de entrada e a tela
-        const squareRootValue = Math.sqrt(
-          parseFloat(this.calculatorInput.join(''))
-        );
-        this.calculatorInput = [squareRootValue.toString()];
-        this.updateCalculatorScreenValue();
+      case 'sqrt':
+        const valueForSquareRoot = parseFloat(this.calculatorInput.join('').replace(',', '.'));
+        if (!isNaN(valueForSquareRoot)) {
+          if (valueForSquareRoot < 0) {
+            alert('Não é possível calcular a raiz quadrada de um número negativo');
+            this.clearInput();
+          } else {
+            const squareRootValue = Math.sqrt(valueForSquareRoot);
+            this.calculatorInput = [squareRootValue.toString().replace('.', ',')];
+            this.updateCalculatorScreenValue();
+          }
+        } else {
+          alert('Entrada inválida para raiz quadrada');
+          this.clearInput();
+        }
         break;
-      case '%': // Redireciona o User para uma nova calculadora
+      case 'plus-minus':
+        const currentValueForToggle = parseFloat(this.calculatorInput.join('').replace(',', '.'));
+        if (!isNaN(currentValueForToggle)) {
+          const toggledValue = currentValueForToggle * -1;
+          this.calculatorInput = [toggledValue.toString().replace('.', ',')];
+          this.updateCalculatorScreenValue();
+        }
+        break;
+      case '%':
         window.location.href = 'https://tgentil.github.io/porcentagens/';
         break;
-      case '/': //adiciona o operador / ao array de entrada
-      case '*': //adiciona o operador / ao array de entrada
-      case '-': //adiciona o operador / ao array de entrada
-      case '+': //adiciona o operador / ao array de entrada
+      case '/':
+      case '*':
+      case '-':
+      case '+':
         this.addInput(value);
         break;
-      case ',': // adiciona a vírgula ao array de entrada
-        // verificação para adicionar 0 antes da vírgula se o valor atual for vazio ou não tiver valor após a vírgula
+      case ',':
         if (
           this.calculatorScreenValue === '0' ||
           this.calculatorScreenValue.slice(-1) === ',' ||
@@ -112,24 +110,27 @@ export class AppComponent {
           this.addInput(',');
         }
         break;
-      case '=': // calcula o resultado e atualiza o array de entrada e a tela
-        // Substitui todas as vírgulas por pontos antes de fazer a conversão
-        const input = this.calculatorInput.join('').replace(',', '.');
-        // Usa a função eval() para calcular o resultado da expressão
-        const result = eval(input);
-        // Limpa o array de entrada e adiciona o resultado
-        this.calculatorInput = [result.toString()];
-        // Atualiza o valor da tela da calculadora
-        this.updateCalculatorScreenValue();
+      case '=':
+        try {
+          const input = this.calculatorInput.join('').replaceAll(',', '.');
+          const result = eval(input);
+          this.calculatorInput = [result.toString().replace('.', ',')];
+          this.updateCalculatorScreenValue();
+        } catch (error) {
+          alert('Erro ao calcular a expressão');
+          this.clearInput();
+        }
         break;
       default:
-        // Se o botão clicado for um número, adiciona-o ao array de entrada
         if (!isNaN(parseFloat(value))) {
           this.addInput(value);
         }
         break;
     }
-  }
+}
+
+
+
   toggleMode() {
     if (this.calculatorMode === 'light') {
       this.calculatorMode = 'dark';

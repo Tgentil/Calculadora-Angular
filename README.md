@@ -6,16 +6,21 @@ Este é um projeto de uma calculadora em Angular que foi desenvolvido com o obje
 
 O projeto está hospedado no endereço https://calculadora-angular-26fe7.web.app/.
 
-## Bugs conhecidos
-
-Atualmente, O botão de raiz quadrada não está calculando corretamente. acredito que aconteçam erros em operações com números que não são inteiros, mas isso já foi otimizado e melhorado bastante. Fora isso ocorreu também um problema no GitHub Pages ao hospedar o site, optei por utilizar o FireBase.
-
+## Update v1.1.3
+- Foram criados testes automatizados no karma, para testar as funções de soma, subtração, multiplicação e divisão, raiz quadra e toggle.
+- Correção de bug na raiz quadrada.
+- Correção de bug em conta com números decimais.
+- Criação da função plusMinus para inverter o sinal do número.
 
 ## Tecnologias usadas
 
 O projeto foi desenvolvido com as seguintes tecnologias:
 
 - Angular
+- Node
+- Karma
+- Jasmine
+- Firebase
 - TypeScript
 - HTML
 - SCSS
