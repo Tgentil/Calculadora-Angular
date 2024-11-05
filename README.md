@@ -25,6 +25,38 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - HTML
 - SCSS
 
+## Primeiro Teste
+
+### Implementação
+
+O código do primeiro teste encontra-se no arquivo app.component.spec.ts e utiliza as bibliotecas de testes Karma e Jasmine. O teste automatizado verifica as funcionalidades básicas da calculadora, como soma, subtração, multiplicação, divisão, alternância de sinal e cálculo da raiz quadrada.
+
+```typescript
+// Exemplo do teste de criação do componente
+it('should create the app', () => {
+  expect(component).toBeTruthy();
+});
+```
+### Documentação
+
+O teste automatizado foi implementado para garantir que a calculadora funcione corretamente para diferentes operações, incluindo:
+
+- *Soma:* Verifica se a soma de dois números aleatórios é realizada corretamente.
+
+- *Subtração:* Testa a subtração entre dois números.
+
+- *Multiplicação:* Avalia a multiplicação com valores aleatórios.
+
+- *Divisão:* Realiza a divisão e verifica o resultado com precisão.
+
+- *Alternância de Sinal:* Confere se o botão para inverter o sinal de um número funciona como esperado.
+
+- *Raiz Quadrada:* Testa o cálculo da raiz quadrada de um número aleatório com precisão.
+
+
+> Para mais detalhes, veja o arquivo app.component.spec.ts na pasta src/app.
+
 ## Autor
 
 * Thiago da Silveira Gentil. 
+*
