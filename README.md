@@ -58,5 +58,4 @@ O teste automatizado foi implementado para garantir que a calculadora funcione c
 
 ## Autor
 
-* Thiago da Silveira Gentil. 
-*
+* Thiago da Silveira Gentil.
