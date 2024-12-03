@@ -105,4 +105,96 @@ describe('AppComponent', () => {
     const expectedSquareRoot = Math.sqrt(num);
     expect(parseFloat(component.calculatorScreenValue.replace(',', '.'))).toBeCloseTo(expectedSquareRoot, 5);
   });
+
+  // Testar raiz quadrada com número negativo
+  it('should calculate the square of a number when "x²" is clicked', () => {
+    const num = 5;
+    simulateButtonClick(component, num.toString());
+    simulateButtonClick(component, 'x²');
+
+    const expectedSquaredValue = Math.pow(num, 2);
+    expect(parseFloat(component.calculatorScreenValue.replace(',', '.'))).toBe(expectedSquaredValue);
+  });
+
+  it('should add input when a numeric value is clicked and falls into default case', () => {
+    const value = '7';
+    simulateButtonClick(component, value);
+
+    expect(component.calculatorInput).toContain(value);
+    expect(component.calculatorScreenValue).toContain(value);
+  });
+
+  it('should clear input when calculation fails due to invalid expression', () => {
+    // Simular uma expressão inválida
+    component.calculatorInput = ['2', '+', '/'];
+
+    component.calculateResult();
+
+    expect(component.calculatorInput).toEqual([]);
+    expect(component.calculatorScreenValue).toBe('0');
+  });
+
+  it('should toggle calculator mode from light to dark', () => {
+    expect(component.calculatorMode).toBe('light');
+
+    component.toggleMode();
+
+    expect(component.calculatorMode).toBe('dark');
+    expect(component.calculatorClass).toBe('calculator dark');
+  });
+
+  it('should toggle calculator mode from dark to light', () => {
+    component.calculatorMode = 'dark';
+    component.calculatorClass = 'calculator dark';
+
+    component.toggleMode();
+
+    expect(component.calculatorMode).toBe('light');
+    expect(component.calculatorClass).toBe('calculator');
+  });
+
+  it('should handle multiple inputs correctly', () => {
+    simulateButtonClick(component, '1');
+    simulateButtonClick(component, '0');
+    simulateButtonClick(component, '+');
+    simulateButtonClick(component, '2');
+
+    expect(component.calculatorInput).toEqual(['1', '0', '+', '2']);
+    expect(component.calculatorScreenValue).toBe('10+2');
+  });
+
+  it('should add "0," when comma is clicked on empty screen', () => {
+    simulateButtonClick(component, ',');
+
+    expect(component.calculatorInput).toEqual(['0,']);
+    expect(component.calculatorScreenValue).toBe('0,');
+  });
+
+  it('should add "," correctly when comma is clicked after a number', () => {
+    simulateButtonClick(component, '5');
+    simulateButtonClick(component, ',');
+
+    expect(component.calculatorInput).toEqual(['5', ',']);
+    expect(component.calculatorScreenValue).toBe('5,');
+  });
+
+  it('should remove the last input when "ce" is clicked', () => {
+    component.calculatorInput = ['1', '0', '+', '2'];
+    component.updateCalculatorScreenValue();
+
+    simulateButtonClick(component, 'ce');
+
+    expect(component.calculatorInput).toEqual(['1', '0', '+']);
+    expect(component.calculatorScreenValue).toBe('10+');
+  });
+
+  it('should remove the last input when "backspace" is clicked', () => {
+    component.calculatorInput = ['1', '0', '+', '2'];
+    component.updateCalculatorScreenValue();
+
+    simulateButtonClick(component, 'backspace');
+
+    expect(component.calculatorInput).toEqual(['1', '0', '+']);
+    expect(component.calculatorScreenValue).toBe('10+');
+  });
 });
